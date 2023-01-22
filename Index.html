@@ -12,16 +12,26 @@
         function Calculate() {
             const input = document.getElementById("input").value;
 
-            const equations = input.split(",");
+            let output = "";
+            if (input) {
+                const equations = input.split(",");
 
-            let result = nerdamer.solveEquations(equations);
-            
-            let output = input ? result.toString() : "Error: Please enter equation(s)";
+                try {
+                    let result = nerdamer.solveEquations(equations);
+                    output = result.toString();
+                } catch (e) {
+                    output = e;
+                }
+            }
+            else {
+                output = "Error: Please enter equation(s)";
+            }
 
-            document.getElementById("result").innerHTML=output;
+            document.getElementById("result").innerHTML = output;
         }
     </script>
 </head>
+
 <body>
     <div class="container-fluid p-5 bg-primary text-white">
         <h1 class="display-1">Algebra Calculator</h1>
@@ -42,19 +52,21 @@
     </form> -->
     <div class="container mt-3">
         <!-- <form> -->
-          <div class="row">
+        <div class="row">
             <div class="col">
-                <input id="input" type="text" class="form-control" id="email" placeholder=" Enter equation" name="equation">
+                <input id="input" type="text" class="form-control" id="email" placeholder=" Enter equation"
+                    name="equation">
             </div>
             <div class="col">
-                <button id="parse_btn" type="submit" class="btn mp-giant-btn btn-primary" onclick="Calculate()">Calculate</button>
+                <button id="parse_btn" type="submit" class="btn mp-giant-btn btn-primary"
+                    onclick="Calculate()">Calculate</button>
             </div>
-          </div>
+        </div>
         <!-- </form> -->
-    </div> 
+    </div>
     <div class="container mt-3">
         <p id="result"></p>
-    </div> 
+    </div>
 </body>
 
 </html>
