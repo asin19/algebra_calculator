@@ -18,7 +18,14 @@
 
                 try {
                     let result = nerdamer.solveEquations(equations);
-                    output = result.toString();
+                    output = "";
+                    for (let element of result) {
+                        const varName = element[0];
+                        const varValue = element[1];
+                        const expression = `${varName}=${varValue}, ` ;
+                        
+                        output += expression;
+                    }
                 } catch (e) {
                     output = e;
                 }
