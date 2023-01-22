@@ -12,9 +12,11 @@
         function Calculate() {
             const input = document.getElementById("input").value;
 
-            let sol = nerdamer.solveEquations(['x+y=1', '2*x=6', '4*z+y=6'])
+            const equations = input.split(",");
+
+            let result = nerdamer.solveEquations(equations);
             
-            let output = input ? sol.toString() : "Error: please enter an equation";
+            let output = input ? result.toString() : "Error: Please enter equation(s)";
 
             document.getElementById("result").innerHTML=output;
         }
