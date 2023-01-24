@@ -19,7 +19,7 @@
                 const equations = input.split(",");
 
                 const isSingleEquation = equations.length == 1;
-                
+
                 try {
                     let result = nerdamer.solveEquations(equations); // for a single equation it returns an array otherwise an array of arrays
                     const resultElements = isSingleEquation ? [result] : result; // We fix the result's structural incosistency here. We make it array of arrays always 
@@ -27,8 +27,8 @@
                     for (let element of resultElements) {
                         const varName = element[0];
                         const varValue = element[1];
-                        const expression = `${varName}=${varValue}, ` ;
-                        
+                        const expression = `${varName}=${varValue}, `;
+
                         output += expression;
                     }
                 } catch (e) {
@@ -46,6 +46,11 @@
 </head>
 
 <body class="mt-5">
+    <style>
+        .form-control::-webkit-input-placeholder {
+            color: rgb(172, 172, 172);
+        }
+    </style>
     <div class="container bg-primary p-5 text-white rounded">
         <h1>Algebra Calculator</h1>
         <h2><small>LPS Maths Exhibition</small></h2>
@@ -59,17 +64,18 @@
                     name="equation">
             </div>
             <div class="col">
-                <button id="parse_btn" type="submit" data-bs-toggle="tooltip" title="Click to calculate"
-                class="btn btn-primary"
+                <button id="parse_btn" type="submit" title="Click to calculate" class="btn btn-primary"
                     onclick="Calculate()">Solve</button>
             </div>
         </div>
         <!-- </form> -->
-            <p  class="pt-3" id="result"></p>
+        <p class="pt-3" id="result"></p>
     </div>
 
     <div class=" p-4 bg-dark text-white fixed-bottom">
-        <p>Made using HTML<br><strong>CSS Library: </strong><a href="https://getbootstrap.com/">Bootstrap</a><br><strong>JS Library: </strong><a href="https://nerdamer.com/">Nerdamer</a></p>
+        <p>Made using HTML<br><strong>CSS Library: </strong><a
+                href="https://getbootstrap.com/">Bootstrap</a><br><strong>JS Library: </strong><a
+                href="https://nerdamer.com/">Nerdamer</a></p>
     </div>
 </body>
 
