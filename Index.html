@@ -43,7 +43,10 @@
             let resultDiv = document.getElementById("result");
         
             resultDiv.innerHTML = "";
-
+            
+            let header = document.createElement("h5");
+            header.innerHTML = "Solution:";
+            resultDiv.appendChild(header);
             for(let o of output) {
                 let resultP = document.createElement("p");
                 resultP.innerHTML = o;
