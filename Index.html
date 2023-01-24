@@ -18,15 +18,15 @@
             if (input) {
                 const equations = input.split(",");
 
-                const isSingleEquation = equations.length == 1;
-
                 try {
-                    let result = nerdamer.solveEquations(equations); // for a single equation it returns an array otherwise an array of arrays
-                    const resultElements = isSingleEquation ? [result] : result; // We fix the result's structural incosistency here. We make it array of arrays always 
+                    let result = nerdamer.solveEquations(equations);
+                    let flattedElements = result.toString().split(",");
+
                     output = [];
-                    for (let element of resultElements) {
-                        const varName = element[0];
-                        const varValue = element[1];
+
+                    for (let i = 0; i < flattedElements.length; i += 2) {
+                        const varName = flattedElements[i];
+                        const varValue = flattedElements[i + 1];
                         const expression = `${varName}=${varValue}`;
 
                         output.push(expression);
@@ -39,15 +39,15 @@
                 output = "Error: Please enter equation(s)";
             }
 
-            
+
             let resultDiv = document.getElementById("result");
-        
+
             resultDiv.innerHTML = "";
-            
+
             let header = document.createElement("h5");
             header.innerHTML = "Solution:";
             resultDiv.appendChild(header);
-            for(let o of output) {
+            for (let o of output) {
                 let resultP = document.createElement("p");
                 resultP.innerHTML = o;
                 resultDiv.appendChild(resultP);
@@ -75,7 +75,7 @@
                 <input id="input" type="text" class="form-control" id="email" placeholder="e.g. x + 3 = 7, 2y - 4 = 4"
                     name="equation">
             </div>
-            
+
             <div class="col">
                 <button id="parse_btn" type="submit" title="Click to Solve" class="btn btn-primary"
                     onclick="Solve()">Solve</button>
@@ -93,4 +93,4 @@
     </div>
 </body>
 
-</html>
+<
