@@ -14,7 +14,7 @@
         function Calculate() {
             const input = document.getElementById("input").value;
 
-            let output = "";
+            let output = [];
             if (input) {
                 const equations = input.split(",");
 
@@ -23,23 +23,32 @@
                 try {
                     let result = nerdamer.solveEquations(equations); // for a single equation it returns an array otherwise an array of arrays
                     const resultElements = isSingleEquation ? [result] : result; // We fix the result's structural incosistency here. We make it array of arrays always 
-                    output = "";
+                    output = [];
                     for (let element of resultElements) {
                         const varName = element[0];
                         const varValue = element[1];
-                        const expression = `${varName}=${varValue}, `;
+                        const expression = `${varName}=${varValue}`;
 
-                        output += expression;
+                        output.push(expression);
                     }
                 } catch (e) {
-                    output = e;
+                    output = [e];
                 }
             }
             else {
                 output = "Error: Please enter equation(s)";
             }
 
-            document.getElementById("result").innerHTML = output;
+            
+            let resultDiv = document.getElementById("result");
+        
+            resultDiv.innerHTML = "";
+
+            for(let o of output) {
+                let resultP = document.createElement("p");
+                resultP.innerHTML = o;
+                resultDiv.appendChild(resultP);
+            }
         }
     </script>
 
@@ -63,13 +72,15 @@
                 <input id="input" type="text" class="form-control" id="email" placeholder="e.g. x + 3 = 7, 2y - 4 = 4"
                     name="equation">
             </div>
+            
             <div class="col">
                 <button id="parse_btn" type="submit" title="Click to calculate" class="btn btn-primary"
                     onclick="Calculate()">Solve</button>
             </div>
         </div>
         <!-- </form> -->
-        <p class="pt-3" id="result"></p>
+        <div id="result" class="pt-3">
+        </div>
     </div>
 
     <div class=" p-4 bg-dark text-white fixed-bottom">
